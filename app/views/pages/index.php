@@ -9,7 +9,7 @@
             class="navbar-brand fw-bold"
             href="<?php echo RUTA_URL; ?>"
         >
-            Gestor de Barberos
+            Gestor de Tareas
         </a>
 
         <div class="ms-auto">
