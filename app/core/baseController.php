@@ -34,4 +34,28 @@ class BaseController {
     public function getJsonBody() {
         return json_decode(file_get_contents('php://input'), true) ?? [];
     }
+    
+
+
+/////////////////////////////////////ALEXIS  10.10.26////////////////////////////
+
+
+    public function tienePermiso($permiso) {
+    if (!isset($_SESSION['user_id'])) {
+        $this->jsonResponse(['success' => false, 'message' => 'No autenticado'], 401);
+    }
+
+    $db = new Database();
+    $db->query("SELECT p.nombre FROM permisos p
+                INNER JOIN rol_permiso rp ON p.id = rp.id_permiso
+                INNER JOIN usuario u ON u.fk_id_rol = rp.id_rol
+                WHERE u.id = :uid AND p.nombre = :perm");
+    $db->bind('uid', $_SESSION['user_id']);
+    $db->bind('perm', $permiso);
+    
+    if (!$db->register()) {
+        $this->jsonResponse(['success' => false, 'message' => 'No tienes permiso para ' . $permiso], 403);
+    }
+    return true;
+}
 }
