@@ -39,6 +39,16 @@
    // Eliminar una tarea por ID
    $router->delete('/api/tareas/{id}', ['TareaController', 'destroy']);
 
+   // =========================================================================
+   // RUTAS API REST - USUARIOS
+   // =========================================================================
+   $router->get('/api/usuarios', ['UsuariosController', 'index']);
+   $router->get('/api/usuarios/crear', ['UsuariosController', 'crear']);
+   $router->post('/api/usuarios/crear', ['UsuariosController', 'crear']);
+   $router->get('/api/usuarios/editar/{id}', ['UsuariosController', 'editar']);
+   $router->post('/api/usuarios/editar/{id}', ['UsuariosController', 'editar']);
+   $router->post('/api/usuarios/eliminar/{id}', ['UsuariosController', 'eliminar']);
+
    // Despachar la solicitud
    $router->dispatch();
 ?>

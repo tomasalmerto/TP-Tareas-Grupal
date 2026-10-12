@@ -12,6 +12,13 @@ export const dashboardTemplate = () => `
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white shadow-sm px-4">
 
+                
+                 <a href="/usuarios" data-link>Lista de Usuarios</a>
+                 
+                 <!-- Enlace oculto por defecto -->
+                    <a href="/usuarios" id="nav-usuarios" data-link style="display: none;">Gestión de Usuarios</a>
+                <button id="btn-logout" style="display: none;">Cerrar Sesión</button>    
+
                 <button
                     id="sidebarToggleTop"
                     class="btn btn-link d-md-none rounded-circle me-3"
