@@ -68,4 +68,21 @@
 
 
 </ul>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Configuración
+    </div>
+
+    <!-- Nav Item - Botón de Modo Oscuro -->
+    <li class="nav-item">
+        <a class="nav-link" href="#" id="btn-cambiar-tema" onclick="event.preventDefault();">
+            <i class="fas fa-fw fa-moon"></i>
+            <span>Cambiar Modo</span>
+        </a>
+    </li>
+
 <!-- End of Sidebar -->
