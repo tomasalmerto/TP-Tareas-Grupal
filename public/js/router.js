@@ -9,6 +9,8 @@ import {
 
 import { renderUsuarios } from './modules/usuarios/index.js'; // ruta para usuarios
 import { renderDashboard } from "./modules/dashboard.js";
+import { renderPermisos} from "./modules/permisos/index.js"; // ruta para permisos
+
 
 const routes = {
   "/": renderHome,
@@ -18,6 +20,7 @@ const routes = {
   "/update-password": renderUpdatePassword,
   "/dashboard": renderDashboard,
   "/usuarios": renderUsuarios,
+  "/permisos": renderPermisos,
 };
 
 const getNormalizedPath = () => {
