@@ -49,6 +49,16 @@
    $router->post('/api/usuarios/editar/{id}', ['UsuariosController', 'editar']);
    $router->post('/api/usuarios/eliminar/{id}', ['UsuariosController', 'eliminar']);
 
+   // =========================================================================
+   // RUTAS API REST - PERMISOS
+   // =========================================================================
+   $router->get('/api/permisos', ['PermisosController', 'index']);
+   $router->get('/api/permisos/crear', ['PermisosController', 'crear']);
+   $router->post('/api/permisos/crear', ['PermisosController', 'crear']);
+   $router->get('/api/permisos/editar/{id}', ['PermisosController', 'editar']);
+   $router->post('/api/permisos/editar/{id}', ['PermisosController', 'editar']);
+   $router->post('/api/permisos/eliminar/{id}', ['PermisosController', 'eliminar']);
+
    // Despachar la solicitud
    $router->dispatch();
 ?>

@@ -12,8 +12,12 @@ export const dashboardTemplate = () => `
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white shadow-sm px-4">
 
-                
-                 <a href="/usuarios" data-link>Lista de Usuarios</a>
+                <div>
+                    <a href="/usuarios" data-link>Gestion de Usuarios</a> 
+
+                    <a href="/permisos" data-link>Gestion de Permisos</a>
+                </div>
+                 
                  
                  <!-- Enlace oculto por defecto -->
                     <a href="/usuarios" id="nav-usuarios" data-link style="display: none;">Gestión de Usuarios</a>
