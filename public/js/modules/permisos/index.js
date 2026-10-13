@@ -196,11 +196,11 @@ export const renderCrearPermiso = (container) => {
             <form id="form-crear-permiso">
                 <div style="margin-bottom: 10px;">
                     <label>Nombre:</label><br>
-                    <input type="text" id="crear-nombre" placeholder="Ej: VER_DASHBOARD" required>
+                    <input type="text" id="crear-nombre" placeholder="ver usuarios" required>
                 </div>
                 <div style="margin-bottom: 10px;">
                     <label>Descripción:</label><br>
-                    <input type="text" id="crear-descripcion" placeholder="Ej: Permite ver la pantalla principal">
+                    <input type="text" id="crear-descripcion" placeholder="puede gestionar usuarios">
                 </div>
                 <button type="submit" style="padding: 10px; background-color: #28a745; color: white; border: none; cursor: pointer;">
                     Guardar Permiso

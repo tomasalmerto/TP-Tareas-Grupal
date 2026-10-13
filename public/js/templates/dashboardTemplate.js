@@ -16,6 +16,8 @@ export const dashboardTemplate = () => `
                     <a href="/usuarios" data-link>Gestion de Usuarios</a> 
 
                     <a href="/permisos" data-link>Gestion de Permisos</a>
+
+                    <a href="/roles" data-link>Gestion de Roles</a>
                 </div>
                  
                  

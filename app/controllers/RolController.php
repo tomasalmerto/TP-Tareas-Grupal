@@ -4,91 +4,107 @@ class RolController extends BaseController {
     private $rolModel;
 
     public function __construct() {
-        // verificar si el usuario es Admin antes de dejarlo continuar
         // AuthHelper::requireRole('admin'); 
         $this->rolModel = $this->model('RolModel');
     }
 
-   // Muestra la lista de todos los roles
+    // Muestra la lista de todos los roles (Devuelve JSON)
     public function index() {
         $roles = $this->rolModel->obtenerRoles();
         
-        $datos = [
-            'titulo' => 'Gestión de Roles',
-            'roles' => $roles
-        ];
-
-        $this->view('roles/index', $datos);
+        if ($roles !== false) {
+            $this->jsonResponse([
+                'success' => true,
+                'data' => $roles
+            ]);
+        } else {
+            $this->jsonResponse([
+                'success' => false,
+                'message' => 'Error al obtener los roles'
+            ], 500);
+        }
     }
 
     
     public function crear() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            // Sanitizar datos del POST
+            // Leer el JSON enviado por fetch
+            $data = json_decode(file_get_contents("php://input"), true);
+            
             $datos = [
-                'nombre' => trim($_POST['nombre']),
-                'descripcion' => trim($_POST['descripcion'])
+                'nombre' => trim($data['nombre'] ?? ''),
+                'descripcion' => trim($data['descripcion'] ?? '')
             ];
             
             if ($this->rolModel->crearRol($datos)) {
-                // Redirigir si fue exitoso
-                header('Location: /roles');
+                $this->jsonResponse([
+                    'success' => true, 
+                    'message' => 'Rol creado correctamente'
+                ]);
             } else {
-                die('Algo salió mal al crear el rol');
+                $this->jsonResponse([
+                    'success' => false, 
+                    'message' => 'Algo salió mal al crear el rol'
+                ], 500);
             }
-        } else {
-            // Si es GET, mostramos el formulario vacío
-            $datos = [
-                'titulo' => 'Crear Rol',
-                'nombre' => '',
-                'descripcion' => ''
-            ];
-            $this->view('roles/crear', $datos);
         }
     }
 
    
-   // Muestra el formulario con los datos a editar
-   
     public function editar($id) {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'PUT') {
+           
+            $data = json_decode(file_get_contents("php://input"), true);
+            
             $datos = [
                 'id' => $id,
-                'nombre' => trim($_POST['nombre']),
-                'descripcion' => trim($_POST['descripcion'])
+                'nombre' => trim($data['nombre'] ?? ''),
+                'descripcion' => trim($data['descripcion'] ?? '')
             ];
 
             if ($this->rolModel->actualizarRol($datos)) {
-                header('Location: /roles');
+                $this->jsonResponse([
+                    'success' => true, 
+                    'message' => 'Rol actualizado correctamente'
+                ]);
             } else {
-                die('Algo salió mal al actualizar el rol');
+                $this->jsonResponse([
+                    'success' => false, 
+                    'message' => 'Algo salió mal al actualizar el rol'
+                ], 500);
             }
         } else {
-           
+          
             $rol = $this->rolModel->obtenerRolPorId($id);
 
-            $datos = [
-                'titulo' => 'Editar Rol',
-                'rol' => $rol
-            ];
-            $this->view('roles/editar', $datos);
+            if ($rol) {
+                $this->jsonResponse([
+                    'success' => true,
+                    'data' => $rol
+                ]);
+            } else {
+                $this->jsonResponse([
+                    'success' => false, 
+                    'message' => 'Rol no encontrado'
+                ], 404);
+            }
         }
     }
 
-   
+    
     public function eliminar($id) {
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST' || $_SERVER['REQUEST_METHOD'] == 'DELETE') {
             if ($this->rolModel->eliminarRol($id)) {
-                header('Location: /roles');
+                $this->jsonResponse([
+                    'success' => true, 
+                    'message' => 'Rol eliminado correctamente'
+                ]);
             } else {
-                die('Algo salió mal al eliminar el rol');
+                $this->jsonResponse([
+                    'success' => false, 
+                    'message' => 'Algo salió mal al eliminar el rol'
+                ], 500);
             }
-        } else {
-            $rol = $this->rolModel->obtenerRolPorId($id);
-            $datos = [
-                'rol' => $rol
-            ];
-            $this->view('roles/eliminar', $datos);
         }
     }
 }
