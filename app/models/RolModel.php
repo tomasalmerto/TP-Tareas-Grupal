@@ -12,7 +12,7 @@ class RolModel {
     
     public function crearRol(array $data)
     {
-        $this -> db -> query("INSERT INTO roles (nombre, descripcion, created_at) VALUES (:nombre, :descripcion, CURRENT_TIMESTAMP)");
+        $this -> db -> query("INSERT INTO roles (nombre, descripcion) VALUES (:nombre, :descripcion)");
         
         $this -> db -> bind(':nombre', $data['nombre']);
         $this -> db -> bind(':descripcion', $data['descripcion']);

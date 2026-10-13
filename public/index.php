@@ -59,6 +59,16 @@
    $router->post('/api/permisos/editar/{id}', ['PermisosController', 'editar']);
    $router->post('/api/permisos/eliminar/{id}', ['PermisosController', 'eliminar']);
 
+    // =========================================================================
+   // RUTAS API REST - ROLES
+   // =========================================================================
+   $router->get('/api/roles', ['RolController', 'index']);
+   $router->get('/api/roles/crear', ['RolController', 'crear']);
+   $router->post('/api/roles/crear', ['RolController', 'crear']);
+   $router->get('/api/roles/editar/{id}', ['RolController', 'editar']);
+   $router->post('/api/roles/editar/{id}', ['RolController', 'editar']);
+   $router->post('/api/roles/eliminar/{id}', ['RolController', 'eliminar']);
+
    // Despachar la solicitud
    $router->dispatch();
 ?>
